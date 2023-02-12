@@ -2,6 +2,8 @@
 //declarations and imports
 const mariadb = require('mariadb');
 const express = require('express');
+const userRoutes = require('./routes/user');
+const bodyParser = require('body-parser');
 require ('dotenv').config()
 
 const app = express();
@@ -24,6 +26,8 @@ pool.getConnection()
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
+app.use(bodyParser.json()); //
+app.use('/api/user', userRoutes);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
