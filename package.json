@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ahab64/mariadb_API/issues"
   },
-  "homepage": "https://github.com/ahab64/mariadb_API#readme"
+  "homepage": "https://github.com/ahab64/mariadb_API#readme",
+  "dependencies": {
+    "mariadb": "^3.0.2"
+  }
 }
