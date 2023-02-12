@@ -1,22 +1,25 @@
 {
   "name": "mariadb_api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A simple API for mariadb",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ahab64/mariadb_API.git"
   },
-  "author": "",
+  "author": "ahab64",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ahab64/mariadb_API/issues"
   },
   "homepage": "https://github.com/ahab64/mariadb_API#readme",
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
     "mariadb": "^3.0.2"
   }
 }
