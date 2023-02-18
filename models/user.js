@@ -33,6 +33,7 @@ const User = sequelize.define(
     },
     mail: {
       type: DataTypes.STRING(100),
+      allowNull: false
     },
     date_of_birth: {
       type: DataTypes.DATEONLY,
