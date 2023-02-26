@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const crypto = require('crypto');
 require("dotenv").config();
 
 const sequelize = new Sequelize(
@@ -7,7 +8,7 @@ const sequelize = new Sequelize(
   process.env.DB_PWD,
   {
     host: process.env.DB_HOST,
-    dialect: "mariadb",
+    dialect: "mariadb", 
   }
 );
 
@@ -25,25 +26,31 @@ sequelize
 const User = sequelize.define(
   "user",
   {
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
-    },
     mail: {
       type: DataTypes.STRING(100),
       allowNull: false
     },
-    date_of_birth: {
-      type: DataTypes.DATEONLY,
-    },
-    land_of_residence: {
+    firstName: {
       type: DataTypes.STRING(100),
+      allowNull: false
     },
-    alias: {
+    lastName: {
       type: DataTypes.STRING(100),
+      allowNull: false
     },
+    role: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      set(value) {
+        const salt = crypto.randomBytes(16).toString('hex');
+        const hash = crypto.pbkdf2Sync(value, salt, 1000, 64, 'sha512').toString('hex');
+        this.setDataValue('password', `${salt}:${hash}`);
+      }
+    }
   },
   {
     //room for options
@@ -51,5 +58,5 @@ const User = sequelize.define(
   }
 );
 
-User.sync({alter: true});
+User.sync({force: true});
 module.exports = User;
